@@ -105,8 +105,23 @@
 
           board.append(boards);
     };
+    
     jQuery(document).ready(sortBuilds());
-    jQuery("#wallboard").onchange = sortBuilds();
+
+    var obTargetNode = document.getElementById('wallboard');
+    var obConfig = { childList: true };
+    var ob = new MutationObserver(
+        function(mut, observer) {
+            ob.disconnect();
+            console.log("Disconneting observer");
+            sortBuilds();
+            ob.observe(obTargetNode, obConfig);
+            console.log("Connecting observer");
+        }
+    );
+    ob.observe(obTargetNode, obConfig);
+
+    
 </script>
 [@ui.renderWebPanels "wallboard.after"/]
 [#if serverLifecycleState?string == "PAUSED"]
