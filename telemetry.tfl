@@ -21,7 +21,7 @@
     ${webResourceManager.requireResourcesForContext("atl.telemetry")}
     ${webResourceManager.getRequiredResources(UrlMode.AUTO)}
     <style type="text/css">
-        #wallboard { margin:0 auto; padding: 0 10%; font-size: 1.5em !important; }
+        #wallboard { margin:0 auto; padding: 0 10%; }
     </style>
 </head>
 <body>
