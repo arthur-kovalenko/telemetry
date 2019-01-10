@@ -21,14 +21,13 @@
     ${webResourceManager.requireResourcesForContext("atl.telemetry")}
     ${webResourceManager.getRequiredResources(UrlMode.AUTO)}
     <style type="text/css">
-        .build { margin:0 auto; }
+        #wallboard { margin:0 auto; padding: 0 10%; font-size: 1.5em !important; }
     </style>
 </head>
 <body>
 [@ui.renderWebPanels "wallboard.before"/]
 <div id="wallboard">
     [#assign buildsToList= filteredBuilds]
-    [#assign buildWidth = "80%"]
     [#if buildsToList.size() < 1]
     <div class="no-builds">
         <h3>Bamboo has found no builds to display</h3>
@@ -37,7 +36,7 @@
     [#else]
         [#list buildsToList as build]
             [#if build.latestResultsSummary??]
-            <div data-datetime="${build.latestResultsSummary.buildDate}" class="build"[#if buildWidth??] style="width: ${buildWidth};"[/#if]>
+            <div data-datetime="${build.latestResultsSummary.buildDate}" class="build">
                 <div class="result ${build.latestResultsSummary.buildState}">
                     <a href="${req.contextPath}/browse/${build.planKey}" class="plan-name">${build.buildName}</a>
                     <div class="build-details">
