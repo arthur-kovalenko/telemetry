@@ -28,6 +28,7 @@
 [@ui.renderWebPanels "wallboard.before"/]
 <div id="wallboard">
     [#assign buildsToList= filteredBuilds]
+    [#assign buildWidth = "100%"]
     [#if buildsToList.size() < 1]
     <div class="no-builds">
         <h3>Bamboo has found no builds to display</h3>
@@ -36,7 +37,7 @@
     [#else]
         [#list buildsToList as build]
             [#if build.latestResultsSummary??]
-            <div data-datetime="${build.latestResultsSummary.buildDate}" class="build">
+            <div data-datetime="${build.latestResultsSummary.buildDate}" class="build"[#if buildWidth??] style="width: ${buildWidth};"[/#if]>
                 <div class="result ${build.latestResultsSummary.buildState}">
                     <a href="${req.contextPath}/browse/${build.planKey}" class="plan-name">${build.buildName}</a>
                     <div class="build-details">
