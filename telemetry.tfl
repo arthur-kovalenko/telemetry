@@ -105,7 +105,7 @@
 
           board.append(boards);
     };
-    
+
     jQuery(document).ready(sortBuilds());
 
     var obTargetNode = document.getElementById('wallboard');
@@ -113,10 +113,8 @@
     var ob = new MutationObserver(
         function(mut, observer) {
             ob.disconnect();
-            console.log("Disconneting observer");
             sortBuilds();
             ob.observe(obTargetNode, obConfig);
-            console.log("Connecting observer");
         }
     );
     ob.observe(obTargetNode, obConfig);
