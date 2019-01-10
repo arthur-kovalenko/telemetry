@@ -95,16 +95,18 @@
     [/#if]
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function(){
-      var board = jQuery("#wallboard");
-      var boards = board.children('.build').detach().get();
+    function sortBuilds() {
+          var board = jQuery("#wallboard");
+          var boards = board.children('.build').detach().get();
 
-      boards.sort(function(a, b) {
-        return new Date(jQuery(b).attr("data-datetime")) - new Date(jQuery(a).attr("data-datetime"));
-      });
+          boards.sort(function(a, b) {
+            return new Date(jQuery(b).attr("data-datetime")) - new Date(jQuery(a).attr("data-datetime"));
+          });
 
-      board.append(boards);
-    });
+          board.append(boards);
+    };
+    jQuery(document).ready(sortBuilds());
+    jQuery("#wallboard").onchange = sortBuilds();
 </script>
 [@ui.renderWebPanels "wallboard.after"/]
 [#if serverLifecycleState?string == "PAUSED"]
