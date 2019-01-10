@@ -20,18 +20,15 @@
 
     ${webResourceManager.requireResourcesForContext("atl.telemetry")}
     ${webResourceManager.getRequiredResources(UrlMode.AUTO)}
+    <style type="text/css">
+        .build { margin:0 auto; }
+    </style>
 </head>
 <body>
 [@ui.renderWebPanels "wallboard.before"/]
 <div id="wallboard">
     [#assign buildsToList= filteredBuilds]
-    [#if buildsToList.size() > 0 && buildsToList.size() < 6]
-        [#assign buildWidth = "80%"]
-    [#elseif buildsToList.size() > 5 && buildsToList.size() < 9]
-        [#assign buildWidth = "50%"]
-    [#elseif buildsToList.size() > 5 && buildsToList.size() < 13]
-        [#assign buildWidth = "33.33%"]
-    [/#if]
+    [#assign buildWidth = "80%"]
     [#if buildsToList.size() < 1]
     <div class="no-builds">
         <h3>Bamboo has found no builds to display</h3>
