@@ -26,10 +26,10 @@
 <div id="wallboard">
     [#assign buildsToList= filteredBuilds]
     [#if buildsToList.size() > 0 && buildsToList.size() < 6]
-        [#assign buildWidth = "100%"]
+        [#assign buildWidth = "80%"]
     [#elseif buildsToList.size() > 5 && buildsToList.size() < 9]
         [#assign buildWidth = "50%"]
-    [#elseif buildsToList.size() > 8 && buildsToList.size() < 13]
+    [#elseif buildsToList.size() > 5 && buildsToList.size() < 13]
         [#assign buildWidth = "33.33%"]
     [/#if]
     [#if buildsToList.size() < 1]
@@ -96,21 +96,14 @@
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function(){
-        var items = jQuery(".build");
+      var board = jQuery("#wallboard");
+      var boards = board.children('.build').detach().get();
 
-        items.each(function() {
-           var BCDate = jQuery(this).attr("data-datetime");
-           var standartDate = new Date(BCDate).getTime();
-           jQuery(this).attr("date-time", standartDate);
-        });
+      boards.sort(function(a, b) {
+        return new Date(jQuery(b).attr("data-datetime")) - new Date(jQuery(a).attr("data-datetime"));
+      });
 
-        items.sort(function(a,b){
-            a = parseFloat(jQuery(a).attr("data-datetime"));
-            b = parseFloat(jQuery(b).attr("data-datetime"));
-            return a>b ? -1 : a<b ? 1 : 0;
-        }).each(function(){
-            jQuery("#wallboard").prepend(this);
-        });
+      board.append(boards);
     });
 </script>
 [@ui.renderWebPanels "wallboard.after"/]
